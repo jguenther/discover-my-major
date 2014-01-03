@@ -24,6 +24,6 @@ In any mode you should be able to summon the popup by invoking `M-x discover-my-
 
 The recommended key binding is `C-h C-m`:
 
-``lisp
+```lisp
 (global-set-key (kbd "C-h C-m") 'discover-my-major)
 ```
