@@ -21,3 +21,9 @@ The command is inspired by [discover.el](https://github.com/mickeynp/discover.el
 ## Usage
 
 In any mode you should be able to summon the popup by invoking `M-x discover-my-major` which will show you a list of key bindings with descriptions.
+
+The recommended key binding is `C-h C-m`:
+
+``lisp
+(global-set-key (kbd "C-h C-m") 'discover-my-major)
+```
