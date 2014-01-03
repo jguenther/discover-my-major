@@ -1,4 +1,4 @@
-;;; discover-my-major.el --- Popup the keys and description for the current major mode
+;;; discover-my-major.el --- Discover key bindings and their meaning for the current Emacs major mode
 
 ;; Copyright (C) 2014, Steckerhalter
 
@@ -24,7 +24,7 @@
 
 ;;; Commentary:
 
-;; Popup the keys and description for the current major mode
+;; Discover key bindings and their meaning for the current Emacs major mode
 
 ;;; Code:
 
@@ -102,8 +102,8 @@
       (makey-initialize-key-groups
        (list `(,group-name
                (description (format "%s Major mode" ,major-mode))
-               (actions ,(cons major-mode (dmm/major-mode-actions))))))
-    (funcall (dmm/get-makey-func group-name)))))
+               (actions ,(cons major-mode (dmm/major-mode-actions)))))))
+    (funcall (dmm/get-makey-func group-name))))
 
 (provide 'discover-my-major)
 
