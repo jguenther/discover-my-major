@@ -29,13 +29,17 @@
 ;;; Code:
 
 (defun dmm/major-mode-actions ()
+  "Loop over the bindings and return a list with the actions properly formatted."
   (delq nil (mapcar 'dmm/format-binding (dmm/major-mode-bindings))))
 
 (defun dmm/major-mode-bindings (&optional buffer)
+  "Return a list with  the bindings of BUFFER.
+If BUFFER is not specified then use the current buffer."
   (let ((buffer (or buffer (current-buffer))))
     (cdr (assoc "Major Mode Bindings:" (dmm/descbinds-all-sections (current-buffer))))))
 
 (defun dmm/doc-summary (doc)
+  "Return the summary for a complete docstring DOC."
   (let* ((docstring (cdr (help-split-fundoc doc nil)))
          (get-summary (lambda (str)
                         (string-match "^\\(.*\\)$" str)
@@ -43,6 +47,7 @@
     (funcall get-summary (if docstring docstring doc))))
 
 (defun dmm/format-binding (item)
+  "Check if ITEM has documention and return the formatted action for ITEM."
   (let* ((key (car item))
          (str (cdr item))
          (sym (intern-soft str))
@@ -51,6 +56,8 @@
       (list key (dmm/doc-summary doc) str))))
 
 (defun dmm/descbinds-all-sections (buffer &optional prefix menus)
+  "Get the output from `describe-buffer-bindings' and parse the
+result into a list with sections."
   (with-temp-buffer
     (let ((indent-tabs-mode t))
       (describe-buffer-bindings buffer prefix menus))
@@ -92,13 +99,16 @@
       (nreverse sections))))
 
 (defun dmm/get-makey-func (group-name)
+  "If a makey function for GROUP-NAME is defind return the symbol, otherwise nil."
   (intern-soft (concat "makey-key-mode-popup-" (symbol-name group-name))))
 
 ;;;###autoload
-(defun discover-my-major ()
-  (interactive)
+(defun discover-my-major (arg)
+  "Create a makey popup listing all major-mode keys with their description.
+If ARG is non-nil recreate the makey popup function even if it is already defined."
+  (interactive "P")
   (let* ((group-name major-mode))
-    (unless (dmm/get-makey-func group-name)
+    (when (or (not (dmm/get-makey-func group-name)) arg)
       (makey-initialize-key-groups
        (list `(,group-name
                (description (format "%s Major mode" ,major-mode))
