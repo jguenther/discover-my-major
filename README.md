@@ -6,6 +6,8 @@ The command is inspired by [discover.el](https://github.com/mickeynp/discover.el
 
 **Currently this is still in development. The output is pretty bare bones and not optimized**
 
+![discover-my-major screenshot](https://raw.github.com/steckerhalter/discover-my-major/master/discover-my-major.png)
+
 ## Installation
 
 ### el-get
