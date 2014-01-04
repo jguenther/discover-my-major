@@ -38,22 +38,28 @@ If BUFFER is not specified then use the current buffer."
   (let ((buffer (or buffer (current-buffer))))
     (cdr (assoc "Major Mode Bindings:" (dmm/descbinds-all-sections (current-buffer))))))
 
-(defun dmm/doc-summary (doc)
-  "Return the summary for a complete docstring DOC."
-  (let* ((docstring (cdr (help-split-fundoc doc nil)))
-         (get-summary (lambda (str)
-                        (string-match "^\\(.*\\)$" str)
-                        (match-string 0 str))))
-    (funcall get-summary (if docstring docstring doc))))
+(defun dmm/doc-summary (sym)
+  "Return the docstring summary for the symbol SYM.
+If SYM is not a function, return nil. If SYM is not documented,
+return the name of SYM with a notice that it is not documented."
+  (when (and sym (fboundp sym))
+    (let ((doc (documentation sym)))
+      (if doc
+          (let* ((docstring (cdr (help-split-fundoc doc nil)))
+                 (get-summary (lambda (str)
+                                (string-match "^\\(.*\\)$" str)
+                                (match-string 0 str))))
+            (funcall get-summary (if docstring docstring doc)))
+        (format "`%s' (not documented)" sym)))))
 
 (defun dmm/format-binding (item)
   "Check if ITEM has documention and return the formatted action for ITEM."
   (let* ((key (car item))
          (str (cdr item))
          (sym (intern-soft str))
-         (doc (when (and sym (fboundp sym)) (documentation sym))))
+         (doc (dmm/doc-summary sym)))
     (when doc
-      (list key (dmm/doc-summary doc) str))))
+      (list key doc str))))
 
 (defun dmm/descbinds-all-sections (buffer &optional prefix menus)
   "Get the output from `describe-buffer-bindings' and parse the
@@ -110,8 +116,13 @@ If ARG is non-nil recreate the makey popup function even if it is already define
   (let* ((group-name major-mode))
     (when (or (not (dmm/get-makey-func group-name)) arg)
       (makey-initialize-key-groups
-       (list `(,group-name
-               (description (format "%s Major mode" ,major-mode))
+       (list `(,major-mode
+               (description ,(format
+                              "Discover my `%s' Major --- %s"
+                              major-mode
+                              (replace-regexp-in-string
+                               "[\e\r\n\t]+" " "
+                               (documentation major-mode))))
                (actions ,(cons major-mode (dmm/major-mode-actions)))))))
     (funcall (dmm/get-makey-func group-name))))
 
