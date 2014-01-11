@@ -118,7 +118,7 @@ If ARG is non-nil recreate the makey popup function even if it is already define
       (makey-initialize-key-groups
        (list `(,major-mode
                (description ,(format
-                              "Discover my `%s' Major --- %s"
+                              "Discover my Major: `%s' --- %s"
                               major-mode
                               (replace-regexp-in-string
                                "[\e\r\n\t]+" " "
