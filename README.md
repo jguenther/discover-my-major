@@ -4,13 +4,21 @@ Discover key bindings and their meaning for the current Emacs major mode.
 
 The command is inspired by [discover.el](https://github.com/mickeynp/discover.el) and also uses the [makey library](https://github.com/mickeynp/makey). I thought, "Hey! Why not parse the information about the major mode bindings somehow and display that like `discover.el` does..."
 
-Currently this is still in development. The output is pretty bare bones and not optimized but it seems to work already quite well for most modes:
+The output is pretty bare bones and not optimized but it seems to work already quite well for most modes:
 
 ![package-menu-mode screenshot](https://raw.github.com/steckerhalter/discover-my-major/master/package-menu-mode.png)
 
 ![git-commit-mode screenshot](https://raw.github.com/steckerhalter/discover-my-major/master/git-commit-mode.png)
 
 ## Installation
+
+### quelpa
+
+`quelpa` is at https://github.com/quelpa/quelpa
+
+```lisp
+(quelpa '(discover-my-major :fetcher github :repo "steckerhalter/discover-my-major"))
+```
 
 ### el-get
 
