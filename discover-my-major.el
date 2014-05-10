@@ -28,6 +28,8 @@
 
 ;;; Code:
 
+(require 'makey)
+
 (defun dmm/major-mode-actions ()
   "Loop over the bindings and return a list with the actions properly formatted."
   (delq nil (mapcar 'dmm/format-binding (dmm/major-mode-bindings))))
