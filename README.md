@@ -20,6 +20,10 @@ The output is pretty bare bones and not optimized but it seems to work already q
 (quelpa '(discover-my-major :fetcher github :repo "steckerhalter/discover-my-major"))
 ```
 
+### MELPA
+
+Packages are available in [MELPA](http://melpa.milkbox.net/).
+
 ### el-get
 
 ```lisp
