@@ -59,7 +59,7 @@ return the name of SYM with a notice that it is not documented."
          (sym (intern-soft str))
          (doc (dmm/doc-summary sym)))
     (when doc
-      (list key doc str))))
+      (list key doc sym))))
 
 (defun dmm/descbinds-all-sections (buffer &optional prefix menus)
   "Get the output from `describe-buffer-bindings' and parse the
