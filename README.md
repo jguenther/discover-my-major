@@ -36,7 +36,7 @@ Packages are available in [MELPA](http://melpa.milkbox.net/).
 
 In any mode you should be able to summon the popup by invoking `M-x discover-my-major` which will show you a list of key bindings with descriptions.
 
-The recommended key binding is `C-h C-m`:
+The recommended key binding is `C-h C-m` (please be aware that by default `C-h C-m` is bound to `view-order-manuals` so please use another binding if you want to keep that):
 
 ```lisp
 (global-set-key (kbd "C-h C-m") 'discover-my-major)
