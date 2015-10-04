@@ -165,6 +165,7 @@ If ARG is non-nil recreate the makey popup function even if it is already define
                (actions ,(cons major-mode (dmm/major-mode-actions (current-buffer))))))))
     (funcall (dmm/get-makey-func group-name))))
 
+;;;###autoload
 (defun discover-my-mode (mode)
   "Create a makey popup listing all MODE keys with their description."
   (interactive
