@@ -68,7 +68,7 @@ output of `describe-buffer-bindings'."
                         (format "`%s' Minor Mode Bindings:" mode-name))))
     mode-string))
 
-(defun dmm/mode-has-bindings (mode &optional buffer)
+(defun dmm/mode-has-bindings-p (mode &optional buffer)
   "Returns t if MODE has bindings defined in BUFFER.
 If BUFFER is nil, checks for bindings in `current-buffer'. Returns nil
 if MODE is not a mode symbol or mode name or if MODE has no actions in
@@ -180,7 +180,7 @@ If ARG is non-nil recreate the makey popup function even if it is already define
           (if (symbolp mode)
               mode
             (intern mode))))
-    (if (dmm/mode-has-bindings mode-symbol)
+    (if (dmm/mode-has-bindings-p mode-symbol)
         (makey-initialize-key-groups
          (list `(,mode-symbol
                  (description ,(format
