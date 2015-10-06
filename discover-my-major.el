@@ -166,13 +166,16 @@ If ARG is non-nil recreate the makey popup function even if it is already define
                (actions ,(cons major-mode (dmm/major-mode-actions (current-buffer))))))))
     (funcall (dmm/get-makey-func group-name))))
 
+(defvar dmm/discover-my-mode-history nil
+  "History list for `dmm/discover-my-mode'.")
+
 ;;;###autoload
 (defun discover-my-mode (mode)
   "Create a makey popup listing all MODE keys with their description."
   (interactive
    (let* ((active-modes (list-active-modes)))
      (list
-      (completing-read "Discover mode: " active-modes 'symbolp t nil 'command-history nil))))
+      (completing-read "Discover mode: " active-modes 'symbolp t nil 'dmm/discover-my-mode-history nil))))
   (let* ((mode-name (if (symbolp mode)
                         (symbol-name mode)
                       mode))
