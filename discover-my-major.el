@@ -173,7 +173,7 @@ If ARG is non-nil recreate the makey popup function even if it is already define
 (defun discover-my-mode (mode)
   "Create a makey popup listing all MODE keys with their description."
   (interactive
-   (let* ((active-modes (list-active-modes)))
+   (let* ((active-modes (dmm/list-active-modes)))
      (list
       (completing-read "Discover mode: " active-modes 'symbolp t nil 'dmm/discover-my-mode-history nil))))
   (let* ((mode-name (if (symbolp mode)
@@ -196,7 +196,7 @@ If ARG is non-nil recreate the makey popup function even if it is already define
       (error "Mode `%s' has no bindings in the current buffer." mode-name))
     (funcall (dmm/get-makey-func mode-symbol))))
 
-(defun list-active-modes ()
+(defun dmm/list-active-modes ()
   "Returns a list of the active modes in the current buffer."
   (let ((active-modes))
     (mapc (lambda (mode) (condition-case nil
