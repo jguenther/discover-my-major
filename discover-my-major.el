@@ -69,9 +69,10 @@ output of `describe-buffer-bindings'."
     mode-string))
 
 (defun dmm/mode-has-bindings (mode &optional buffer)
-  "Returns t if MODE has bindings defined in BUFFER, or in `current-buffer' if not set.
-Returns nil if MODE is not a mode symbol or mode name or if MODE has
-no actions in BUFFER."
+  "Returns t if MODE has bindings defined in BUFFER.
+If BUFFER is nil, checks for bindings in `current-buffer'. Returns nil
+if MODE is not a mode symbol or mode name or if MODE has no actions in
+BUFFER."
   (let* ((mode-symbol (if (symbolp mode)
                           mode
                         (intern mode))))
